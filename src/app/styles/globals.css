@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -9,63 +9,63 @@
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
- 
+
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
- 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
- 
+
+    --primary: 355 87% 44%;
+    --primary-foreground: 0 0% 100%;
+
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
- 
+
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
- 
+
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
- 
+
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
- 
+
     --radius: 0.5rem;
   }
- 
+
   .dark {
     --background: 0 0% 0%;
     --foreground: 210 40% 98%;
- 
+
     --card: 0 0% 12%;
     --card-foreground: 58 42% 88%;
- 
+
     --popover: 0 0% 12%;
     --popover-foreground: 58 42% 88%;
- 
+
     --primary: 58 77% 59%;
     --primary-foreground: 0 0% 0%;
- 
+
     --secondary: 0 0% 17%;
     --secondary-foreground: 58 42% 88%;
- 
+
     --muted: 0 0% 17%;
     --muted-foreground: 25 5.3% 44.7%;
- 
+
     --accent: 0 0% 17%;
     --accent-foreground: 24 9.8% 10%;
- 
+
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 60 9.1% 97.8%;
- 
+
     --border: 0 0% 12%;
     --input: 0 0% 12%;
     --ring: 20 14.3% 4.1%;
   }
 }
- 
+
 @layer base {
   * {
     @apply border-border;
@@ -76,7 +76,6 @@
   }
 }
 
-
 body {
   width: 100vw;
   min-height: 100vh;
@@ -85,8 +84,8 @@ body {
   justify-content: center;
 }
 body:after {
-  content: '';
-  background-image: url('/grid.svg');
+  content: "";
+  background-image: url("/grid.svg");
   z-index: -1;
   position: absolute;
   width: 100%;
@@ -98,12 +97,11 @@ body:after {
 @media (prefers-color-scheme: dark) {
   body:after {
     filter: unset;
- }
+  }
 }
-
 
 @media (min-width: 768px) {
   .md\:grid-cols-14 {
-      grid-template-columns: repeat(14, minmax(0, 1fr));
+    grid-template-columns: repeat(14, minmax(0, 1fr));
   }
 }

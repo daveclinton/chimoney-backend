@@ -34,10 +34,10 @@ export const metadata: Metadata = {
   authors: [
     {
       name: "David Clinton",
-      url: "https://github.com/Sukrittt",
+      url: "https://github.com/daveclinton",
     },
   ],
-  creator: "Sukrittt",
+  creator: "David Clinton",
   openGraph: {
     type: "website",
     locale: "en_IN",
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
-    creator: "@SukritSaha11",
+    creator: "@daveclintonn",
   },
   metadataBase: new URL("http://localhost:3000"),
 };
@@ -65,7 +65,7 @@ export default function RootLayout({
       <body
         className={cn(
           font.className,
-          "bg-gradient-to-r from-[#000] to-[#1e1e1e]"
+          "bg-gradient-to-r from-[#3a3b45] to-[#2b3131]"
         )}
       >
         <Providers>

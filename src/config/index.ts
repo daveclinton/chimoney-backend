@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "TypeFest",
   description: "A tournament platform for typing enthusiasts.",
-  url: "https://typournament.vercel.app",
+  url: "https://type-festival.vercel.app/",
 };
 
 export const RoundScenario = {
