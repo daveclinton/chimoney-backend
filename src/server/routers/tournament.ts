@@ -133,28 +133,57 @@ export const tournamentRouter = createTRPCRouter({
   createTournament: privateProcedure
     .input(createTournamentSchema)
     .mutation(async ({ ctx, input }) => {
-      const createdTournament = await db
-        .insert(tournament)
-        .values({
-          name: input.name,
-          creatorId: ctx.userId,
-        })
-        .returning();
+      console.log("Creating tournament with input:", input);
+      console.log("User ID:", ctx.userId);
 
-      const tournamentId = createdTournament[0].id;
+      try {
+        const createdTournament = await db
+          .insert(tournament)
+          .values({
+            name: input.name,
+            creatorId: ctx.userId,
+          })
+          .returning();
 
-      const caller = requestRouter.createCaller(ctx);
-      const { fewInvalidUsers } = await caller.createRequests({
-        tournamentId,
-        emailIds: input.emailIds,
-      });
+        console.log("Created tournament:", createdTournament);
 
-      await db.insert(participation).values({
-        tournamentId,
-        userId: ctx.userId,
-      });
+        if (!createdTournament || createdTournament.length === 0) {
+          console.error("Failed to create tournament: No tournament returned");
+          throw new TRPCError({
+            code: "INTERNAL_SERVER_ERROR",
+            message: "Failed to create tournament",
+          });
+        }
 
-      return { tournamentId, fewInvalidUsers };
+        const tournamentId = createdTournament[0].id;
+        console.log("Tournament ID:", tournamentId);
+
+        const caller = requestRouter.createCaller(ctx);
+        console.log("Creating requests for emails:", input.emailIds);
+        const { fewInvalidUsers } = await caller.createRequests({
+          tournamentId,
+          emailIds: input.emailIds,
+        });
+        console.log("Requests created. Few invalid users:", fewInvalidUsers);
+
+        console.log("Adding creator to participants");
+        await db.insert(participation).values({
+          tournamentId,
+          userId: ctx.userId,
+        });
+        console.log("Creator added to participants");
+
+        const result = { tournamentId, fewInvalidUsers };
+        console.log("Returning result:", result);
+        return result;
+      } catch (error) {
+        console.error("Error in createTournament:", error);
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "An error occurred while creating the tournament",
+          cause: error,
+        });
+      }
     }),
   updateTournament: privateProcedure
     .input(updateTournamentSchema)
